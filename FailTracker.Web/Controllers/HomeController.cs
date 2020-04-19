@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FailTracker.Web.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,25 @@ namespace FailTracker.Web.Controllers
 {
 	public class HomeController : Controller
 	{
-		public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+        private readonly ISayHello _sayHello;
+
+        public HomeController(ApplicationDbContext context, ISayHello sayHello) {
+            _context = context;
+            _sayHello = sayHello;
+        }
+
+        public ActionResult Index()
 		{
 			return View();
 		}
 	}
+
+    public interface ISayHello
+    { 
+    }
+
+    public class SayHello : ISayHello { 
+
+    }
 }
