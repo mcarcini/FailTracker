@@ -1,4 +1,5 @@
 ﻿using FailTracker.Web.Data;
+using FailTracker.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace FailTracker.Web.Controllers
             _sayHello = sayHello;
         }
 
+        [Log("Index of HomeController")]
         public ActionResult Index()
 		{
 			return View();
