@@ -8,6 +8,11 @@ namespace FailTracker.Web.Data
 		public ApplicationDbContext()
 			: base("DefaultConnection")
 		{
-		}
-	}
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing); 
+        }
+    }
 }
