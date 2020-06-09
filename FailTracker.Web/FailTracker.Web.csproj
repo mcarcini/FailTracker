@@ -172,7 +172,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ControllerConvention.cs" />
+    <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\LogAttribute.cs" />
+    <Compile Include="Infrastructure\StandarRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependenctResolver.cs" />
     <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
