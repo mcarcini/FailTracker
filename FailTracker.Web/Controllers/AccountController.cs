@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using FailTracker.Web.Models;
 using Microsoft.Web.Mvc;
 using System.Web;
+using FailTracker.Web.Infrastructure.Alerts;
 
 namespace FailTracker.Web.Controllers
 {
@@ -289,7 +290,7 @@ namespace FailTracker.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return this.RedirectToAction<HomeController>(c => c.Index());
+            return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Log off");
             //return RedirectToAction("Index", "Home");
         }
 
