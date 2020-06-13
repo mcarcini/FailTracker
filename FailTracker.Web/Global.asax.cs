@@ -1,4 +1,5 @@
 ﻿using FailTracker.Web.Infrastructure;
+using FailTracker.Web.Infrastructure.Tasks;
 using StructureMap;
 using StructureMap.TypeRules;
 using System.Web;
@@ -39,20 +40,54 @@ namespace FailTracker.Web
                 cfg.AddRegistry(new ControllerRegistry());
                 cfg.AddRegistry(new ActionFilterRegistry(
                     () => Container ?? ObjectFactory.Container));
-
+                cfg.AddRegistry(new TaskRegistry());
 
             });
+
+            using (var container = ObjectFactory.Container.GetNestedContainer()) {
+                foreach (var task in container.GetAllInstances<IRunAtInit>()) {
+                    task.Execute();
+                }
+            }
+
+            using (var container = ObjectFactory.Container.GetNestedContainer())
+            {
+                foreach (var task in container.GetAllInstances<IRunAtStartup>())
+                {
+                    task.Execute();
+                }
+            }
+
         }
 
         public void Application_BeginRequest() 
         {
             Container = ObjectFactory.Container.GetNestedContainer();
+
+            foreach (var task in Container.GetAllInstances<IRunOnEachRequest>()) {
+                task.Execute();
+            }
+        }
+
+        public void Application_Error()
+        {
+            foreach (var task in Container.GetAllInstances<IRunOnError>()) {
+                task.Execute();
+            }
         }
 
         public void Application_EndRequest() 
         {
-            Container.Dispose();
-            Container = null;
+            try
+            {
+                foreach (var task in Container.GetAllInstances<IRunAfterEachRequest>()) {
+                    task.Execute();
+                }
+            }
+            finally {
+                Container.Dispose();
+                Container = null;
+            }
         }
     }
 }
