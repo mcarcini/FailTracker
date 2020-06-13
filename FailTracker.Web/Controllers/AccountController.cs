@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using FailTracker.Web.Data;
 using FailTracker.Web.Domain;
@@ -11,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using FailTracker.Web.Models;
+using Microsoft.Web.Mvc;
+using System.Web;
 
 namespace FailTracker.Web.Controllers
 {
@@ -291,7 +289,8 @@ namespace FailTracker.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction<HomeController>(c => c.Index());
+            //return RedirectToAction("Index", "Home");
         }
 
         //

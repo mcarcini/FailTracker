@@ -16,7 +16,7 @@ namespace FailTracker.Web.App_Start
         public void Execute()
         {
             if (!_context.Users.Any()) {
-                _context.Users.Add(new ApplicationUser
+                    _context.Users.Add(new ApplicationUser
                 {
                     UserName = "TestUser"
                 });
