@@ -31,8 +31,8 @@ namespace FailTracker.Web.Infrastructure.ModelMetadata
                 propertyName);
 
             _metadataFilters.ForEach(m =>
-            m.TransformMetadata(metadata, attributes));            
-            return base.CreateMetadata(attributes, containerType, modelAccessor, modelType, propertyName);
+            m.TransformMetadata(metadata, attributes));
+            return metadata;
 
         }
 
