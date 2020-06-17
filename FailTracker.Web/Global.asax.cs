@@ -1,4 +1,5 @@
 ﻿using FailTracker.Web.Infrastructure;
+using FailTracker.Web.Infrastructure.ModelMetadata;
 using FailTracker.Web.Infrastructure.Tasks;
 using StructureMap;
 using StructureMap.TypeRules;
@@ -41,6 +42,7 @@ namespace FailTracker.Web
                 cfg.AddRegistry(new ActionFilterRegistry(
                     () => Container ?? ObjectFactory.Container));
                 cfg.AddRegistry(new TaskRegistry());
+                cfg.AddRegistry(new ModelMetadataRegistry());
 
             });
 

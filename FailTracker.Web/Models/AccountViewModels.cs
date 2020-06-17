@@ -30,8 +30,7 @@ namespace FailTracker.Web.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "User name")]
+        [Required]        
         public string UserName { get; set; }
 
         [Required]
